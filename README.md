@@ -1,2 +1,120 @@
 # CutEdge
-configure and clean Microsoft Edge with policies (WIP)
+This script allows you to automatically fix annoyances with Microsoft Edge & make it more private and secure.
+
+The default search engine is DuckDuckGo. As of now, you may set your own one by modifying the script or the registry values found in Step 2.
+
+
+## Step 1: MDM-FakeEnrollment
+
+Some Microsoft Edge policies (such as homepage, new tab, search provider, and others) are only honored on devices that are either domain-joined or enrolled in an MDM (Mobile Device Management) solution. On standalone or non-domain-joined Windows devices, these policies are ignored—even if set in the registry—unless the device appears to be MDM-managed.
+
+**MDM-FakeEnrollment** is a workaround that adds a minimal set of registry keys to make Edge "think" the device is enrolled in MDM, allowing all restricted policies to be applied and enforced.
+
+> **Note:** This method does not actually enroll your device in any real MDM service; it simply sets the required registry keys so Edge applies all policies as if it were managed.
+
+**Credit:** This solution was discovered and documented by [Gunnar Haslinger at hitco.at](https://hitco.at/blog/apply-edge-policies-for-non-domain-joined-devices/).
+
+### What does MDM-FakeEnrollment do?
+
+- Sets a few registry keys under `HKLM\SOFTWARE\Microsoft\Enrollments` and `HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts` to mimic the presence of an MDM provider.
+- Unlocks the ability to apply and enforce all Microsoft Edge policies, even on non-domain-joined devices.
+- **Side effect:** Windows Defender Tamper Protection will be **TURNED OFF**.
+
+For more details and the original method, see [this blog post](https://hitco.at/blog/apply-edge-policies-for-non-domain-joined-devices/).
+
+
+## Step 2: Microsoft Edge Policy Registry Settings
+
+These policies are up-to-date with Microsoft Edge version 137.
+
+Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
+| Registry Value | Value Set | Description |
+|---|---|---|
+| DefaultJavaScriptJitSetting | 2 | Disables JavaScript JIT (Just-In-Time compilation) for all sites. Improves security but may reduce performance or break some sites. |
+| DefaultSearchProviderEnabled | 1 | Enables the default search provider in the address bar. |
+| DefaultSearchProviderName | "DuckDuckGo" | Sets the display name of the default search provider. |
+| DefaultSearchProviderSearchURL | "https://duckduckgo.com/?q={searchTerms}" | Sets the search URL template for the default search provider. `{searchTerms}` is replaced by the user's query. |
+| GenAILocalFoundationalModelSettings | 1 | Allows Edge to download and use local GenAI foundational models for AI features. |
+| PasswordManagerEnabled | 0 | Disables Edge's built-in password manager and the offer to save passwords. |
+| EfficiencyModeEnabled | 1 | Enables Efficiency Mode to reduce resource usage when the browser is inactive. |
+| PerformanceDetectorEnabled | 0 | Disables the Performance Detector, which suggests actions to improve browsing performance. |
+| StartupBoostEnabled | 0 | Disables Startup Boost, which preloads Edge processes in the background for faster startup. |
+| HomepageIsNewTabPage | 1 | Sets the homepage to the New Tab page. |
+| NewTabPageAppLauncherEnabled | 1 | Shows the app launcher on the New Tab page. |
+| NewTabPageBingChatEnabled | 1 | Enables Bing Chat on the New Tab page. |
+| NewTabPageCompanyLogoEnabled | 1 | Shows the company logo on the New Tab page (for managed devices). |
+| NewTabPageContentEnabled | 0 | Disables content (like news and weather) on the New Tab page. |
+| NewTabPageHideDefaultTopSites | 1 | Hides the default top sites on the New Tab page. |
+| NewTabPageLocation | "about:blank" | Sets the URL loaded for the New Tab page. |
+| NewTabPagePrerenderEnabled | 0 | Disables pre-rendering of the New Tab page. |
+| NewTabPageQuickLinksEnabled | 0 | Disables quick links on the New Tab page. |
+| RestoreOnStartup | 5 | Controls what Edge displays on startup (5 = New Tab). |
+| AADWebSiteSSOUsingThisProfileEnabled | 0 | Disables Azure AD SSO for websites using the current profile. |
+| AIGenThemesEnabled | 0 | Disables AI-generated themes in Edge. |
+| AccessibilityImageLabelsEnabled | 0 | Disables automatic image labeling for accessibility. |
+| AddressBarTrendingSuggestEnabled | 0 | Disables trending search suggestions in the address bar. |
+| AddressBarWorkSearchResultsEnabled | 0 | Disables work search results in the address bar for enterprise users. |
+| AdsSettingForIntrusiveAdsSites | 2 | Blocks ads on sites with intrusive ads. |
+| AdsTransparencyEnabled | 0 | Disables ad transparency features. |
+| AutofillAddressEnabled | 0 | Disables autofill for addresses. |
+| AutofillCreditCardEnabled | 0 | Disables autofill for credit cards. |
+| AutofillMembershipsEnabled | 0 | Disables autofill for membership cards and loyalty programs. |
+| BackgroundModeEnabled | 0 | Disables running Edge in the background after closing all windows. |
+| BingAdsSuppression | 1 | Enables Bing Ads suppression. |
+| BlockThirdPartyCookies | 1 | Enables blocking of third-party cookies. |
+| BrowserSignin | 0 | Disables the ability to sign in to Edge with a Microsoft account. |
+| ConfigureDoNotTrack | 0 | Disables sending "Do Not Track" requests. |
+| ConfigureOnlineTextToSpeech | 0 | Disables online text-to-speech services. |
+| ConfigureShare | 1 | Enables the Share feature in Edge. |
+| DefaultBrowserSettingEnabled | 1 | Sets Edge as the default browser. |
+| CopilotPageContext | 0 | Disables Copilot's access to page context for AI features. |
+| DiagnosticData | 0 | Disables sending diagnostic data to Microsoft. |
+| DefaultShareAdditionalOSRegionSetting | 2 | Controls sharing features based on OS region settings. |
+| Edge3PSerpTelemetryEnabled | 0 | Disables telemetry for third-party search engine results pages. |
+| EdgeAssetDeliveryServiceEnabled | 0 | Disables the Edge Asset Delivery Service. |
+| EdgeAutofillMlEnabled | 0 | Disables machine learning-based autofill predictions. |
+| EdgeCollectionsEnabled | 0 | Disables the Collections feature. |
+| EdgeEDropEnabled | 0 | Disables the Edge Drop feature (file sharing). |
+| EdgeEntraCopilotPageContext | 0 | Disables Entra Copilot's access to page context. |
+| EdgeOpenInSidebarEnabled | 0 | Disables the "Open in sidebar" feature. |
+| EdgeShoppingAssistantEnabled | 0 | Disables the Shopping Assistant feature. |
+| EdgeWalletCheckoutEnabled | 0 | Disables the Edge Wallet checkout feature. |
+| EdgeWalletEtreeEnabled | 0 | Disables the Edge Wallet Etree feature. |
+| EnhanceSecurityMode | 2 | Sets Enhanced Security Mode (2 = Strict). |
+| ForceBingSafeSearch | 0 | Does not force Bing SafeSearch. |
+| ForceGoogleSafeSearch | 0 | Does not force Google SafeSearch. |
+| HttpsUpgradesEnabled | 1 | Enables automatic upgrades from HTTP to HTTPS. |
+| HideFirstRunExperience | 1 | Hides the first run experience for new users. |
+| HideInternetExplorerRedirectUXForIncompatibleSitesEnabled | 1 | Hides the Internet Explorer redirect user experience for incompatible sites. |
+| InAppSupportEnabled | 0 | Disables in-app support features. |
+| LiveCaptionsAllowed | 1 | Enables live captions for media playback. |
+| LocalBrowserDataShareEnabled | 0 | Disables sharing of local browser data. |
+| LocalProvidersEnabled | 0 | Disables local search providers. |
+| MSAWebSiteSSOUsingThisProfileAllowed | 0 | Blocks Microsoft Account SSO for websites using the current profile. |
+| MediaRouterCastAllowAllIPs | 0 | Blocks casting to all IP addresses. |
+| MicrosoftEdgeInsiderPromotionEnabled | 0 | Disables promotion of Edge Insider builds. |
+| PersonalizationReportingEnabled | 0 | Disables personalization reporting. |
+| PersonalizeTopSitesInCustomizeSidebarEnabled | 0 | Disables personalizing top sites in the sidebar. |
+| PinningWizardAllowed | 0 | Disables the Pinning Wizard feature. |
+| PromptForDownloadLocation | 0 | Disables prompt to choose a download location for each download. |
+| ReadAloudEnabled | 1 | Enables the Read Aloud feature. |
+| SavingBrowserHistoryDisabled | 1 | Disables saving of browsing history. |
+| SearchInSidebarEnabled | 2 | Disables the "Search in sidebar" feature. |
+| SearchSuggestEnabled | 0 | Disables search suggestions in the address bar. |
+| SearchbarAllowed | 0 | Disables the Edge Search Bar feature. |
+| SearchbarIsEnabledOnStartup | 0 | Disables the Edge Search Bar on startup. |
+| SendIntranetToInternetExplorer | 0 | Does not send intranet sites to Internet Explorer mode. |
+| ShowMicrosoftRewards | 0 | Hides Microsoft Rewards in Edge. |
+| ShowRecommendationsEnabled | 0 | Hides recommendations in Edge. |
+| SpeechRecognitionEnabled | 0 | Disables speech recognition features. |
+| SpellcheckEnabled | 0 | Disables spellcheck. |
+| SplitScreenEnabled | 1 | Enables the split screen feature. |
+| SyncDisabled | 1 | Disables synchronization of Edge data across devices. |
+| TrackingPrevention | 3 | Sets tracking prevention to Strict. |
+| TaskManagerEndProcessEnabled | 1 | Enables the ability to end processes in the Edge task manager. |
+| TranslateEnabled | 0 | Disables the built-in translation feature. |
+| UrlDiagnosticDataEnabled | 0 | Disables sending URL diagnostic data to Microsoft. |
+| UserFeedbackAllowed | 0 | Disables the ability to send feedback to Microsoft. |
+| WalletDonationEnabled | 0 | Disables the Edge Wallet donation feature. |
+| HubsSidebarEnabled | 0 | Disables the Hubs Sidebar feature. |
+| TabServicesEnabled | 0 | Disables Tab Services (grouping, sharing, etc). |
