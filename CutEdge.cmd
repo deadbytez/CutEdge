@@ -61,10 +61,15 @@ set /p mdmchoice=Your choice [Y/N]:
 if /i "%mdmchoice%"=="Y" (
     echo.
     echo Applying fake MDM enrollment...
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentType" /t REG_DWORD /d 6 /f
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentID" /t REG_SZ /d "00000000-0000-0000-0000-000000000000" /f
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "DeviceCertificate" /t REG_BINARY /d 00 /f
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "UPN" /t REG_SZ /d "user@domain.com" /f
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v EnrollmentState /t REG_DWORD /d 1 /f 
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v EnrollmentType /t REG_DWORD /d 0 /f
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v IsFederated /t REG_DWORD /d 0 /f
+    reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v Flags /t REG_DWORD /d 14000063 /f
+    reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v AcctUId /t REG_SZ /d "0x000000000000000000000000000000000000000000000000000000000000000000000000" /f
+    reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v RoamingCount /t REG_DWORD /d 0 /f
+    reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v SslClientCertReference /t REG_SZ /d "MY;User;0000000000000000000000000000000000000000" /f
+    reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v ProtoVer /t REG_SZ /d "1.2" /f
+
     echo.
     echo Fake MDM enrollment applied!
     pause
