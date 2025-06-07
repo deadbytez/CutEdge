@@ -1,40 +1,14 @@
 @echo off
 title CutEdge v1.0 - Microsoft Edge for Security and Privacy
-
 color 1F
 
-REM Centered title (80 characters wide)
-echo.
-echo                               ===========================
-echo                      CutEdge v1.0 - Microsoft Edge for Security and Privacy
-echo                               ===========================
-echo.
-
-echo  DESCRIPTION
-echo ----------------------------------------------------------
-echo This script fixes many common annoyances with Microsoft Edge
-echo and makes the browser's user interface less cluttered.
-echo It also applies security and privacy enhancements.
-echo.
-echo NOTE: These policies are up-to-date with Microsoft Edge version 137.
-echo.
-echo  IMPORTANT NOTICE
-echo ----------------------------------------------------------
-echo 1. Without MDM FakeEnrollment, most Edge policy changes
-echo    will NOT apply.
-echo 2. As a side effect, Tamper Protection will be forcefully
-echo    turned OFF on this device.
-echo 3. You MUST restart Microsoft Edge after this script
-echo    completes to activate the new policies.
-echo.
-echo 4. If websites do not work properly, enable third-party cookies
-echo    for the website by clicking the padlock button next to the
-echo    address bar, then go into the cookie files section where you
-echo    can enable third-party cookies for that site.
-echo ----------------------------------------------------------
-echo.
-
 :MAINMENU
+cls
+echo ==========================================================
+echo                   CutEdge v1.0
+echo      Microsoft Edge for Security and Privacy
+echo ==========================================================
+echo.
 echo MAIN MENU
 echo ----------------------------------------------------------
 echo [1] Apply all changes (Step 1 and Step 2)
@@ -53,57 +27,51 @@ if "%mainchoice%"=="5" exit /b
 
 echo.
 echo Invalid choice. Please enter 1, 2, 3, 4, or 5.
+pause
 goto MAINMENU
 
 :APPLYALL
 call :STEP1
-call :STEP2
-goto END
+goto MAINMENU
 
 :STEP1
-echo STEP 1: Enroll this device with Fake MDM (MDM-FakeEnrollment)
+cls
+echo STEP 1: Fake MDM Enrollment (to enable policy application)
 echo ----------------------------------------------------------
-echo This step is required to make Windows "feel" MDM-managed.
+echo This step will create registry entries to fake MDM enrollment.
 echo.
-echo Do you want to enroll this device with MDM-FakeEnrollment?
-echo   [Y]es - Enroll now
+echo Do you want to proceed?
+echo   [Y]es - Apply MDM enrollment
 echo   [N]o  - Skip
-echo   [AE]   - Already Enrolled (skip to next step)
-set /p enrollchoice=Your choice [Y/N/AE]: 
+set /p mdmchoice=Your choice [Y/N]: 
 
-if /i "%enrollchoice%"=="Y" (
-    goto ENROLL
-) else if /i "%enrollchoice%"=="AE" (
+if /i "%mdmchoice%"=="Y" (
     echo.
-    echo Skipping MDM enrollment (already enrolled).
+    echo Applying fake MDM enrollment...
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentType" /t REG_DWORD /d 6 /f >nul
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentID" /t REG_SZ /d "00000000-0000-0000-0000-000000000000" /f >nul
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "DeviceCertificate" /t REG_BINARY /d 00 /f >nul
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "UPN" /t REG_SZ /d "user@domain.com" /f >nul
+    echo.
+    echo Fake MDM enrollment applied!
+    pause
+    call :STEP2
     goto :eof
-) else if /i "%enrollchoice%"=="N" (
+)
+if /i "%mdmchoice%"=="N" (
     echo.
     echo Skipping MDM enrollment.
+    pause
+    call :STEP2
     goto :eof
-) else (
-    echo.
-    echo Invalid choice. Please enter Y, N, or AE.
-    goto STEP1
 )
-
-:ENROLL
 echo.
-echo Applying Fake MDM Enrollment registry entries...
-reg add "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v EnrollmentState /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v EnrollmentType /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v IsFederated /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v Flags /t REG_DWORD /d 14000063 /f
-reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v AcctUId /t REG_SZ /d "0x000000000000000000000000000000000000000000000000000000000000000000000000" /f
-reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v RoamingCount /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v SslClientCertReference /t REG_SZ /d "MY;User;0000000000000000000000000000000000000000" /f
-reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /v ProtoVer /t REG_SZ /d "1.2" /f
-echo.
-echo Fake MDM Enrollment complete!
-echo.
-goto :eof
+echo Invalid choice. Please enter Y or N.
+pause
+goto STEP1
 
 :STEP2
+cls
 echo STEP 2: Apply Microsoft Edge for Business Group Policies
 echo ----------------------------------------------------------
 echo Do you want to proceed and apply the Edge policies?
@@ -112,16 +80,19 @@ echo   [N]o  - Skip
 set /p polchoice=Your choice [Y/N]: 
 
 if /i "%polchoice%"=="Y" (
-    goto APPLYPOLICIES
-) else if /i "%polchoice%"=="N" (
+    call :APPLYPOLICIES
+    goto :eof
+)
+if /i "%polchoice%"=="N" (
     echo.
     echo Skipping Edge policies.
+    pause
     goto :eof
-) else (
-    echo.
-    echo Invalid choice. Please enter Y or N.
-    goto STEP2
 )
+echo.
+echo Invalid choice. Please enter Y or N.
+pause
+goto STEP2
 
 :APPLYPOLICIES
 echo.
@@ -216,34 +187,32 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v HubsSidebarEnabled /t REG_DWO
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v TabServicesEnabled /t REG_DWORD /d 0 /f
 echo.
 echo Edge policies applied!
+pause
 goto :eof
 
 :REVERTALL
 call :REVERTMDM
 call :REVERTPOLICIES
-goto END
+goto MAINMENU
 
 :REVERTMDM
+cls
+echo REVERT: Fake MDM Enrollment
+echo ----------------------------------------------------------
+echo This will remove the fake MDM enrollment registry keys.
 echo.
-echo Reverting Step 1: Removing MDM-FakeEnrollment...
-reg delete "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f >nul 2>&1
-reg delete "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f >nul 2>&1
-echo MDM-FakeEnrollment removed.
+reg delete "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /f >nul 2>&1
+echo Fake MDM enrollment removed (if it existed).
+pause
 goto :eof
 
 :REVERTPOLICIES
+cls
+echo REVERT: Microsoft Edge Policies
+echo ----------------------------------------------------------
+echo This will remove the Edge group policy registry keys.
 echo.
-echo Reverting Step 2: Removing Edge policies...
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f >nul 2>&1
-echo Edge policies removed.
-goto :eof
-
-:END
-echo.
-echo ==========================================================
-echo   Operation complete. If you applied or reverted policies,
-echo   please restart Microsoft Edge for changes to take effect.
-echo ==========================================================
-echo.
+echo Edge policies removed (if they existed).
 pause
-goto MAINMENU
+goto :eof
