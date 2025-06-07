@@ -61,7 +61,6 @@ call :STEP2
 goto END
 
 :STEP1
-:MDMSTEP
 echo STEP 1: Enroll this device with Fake MDM (MDM-FakeEnrollment)
 echo ----------------------------------------------------------
 echo This step is required to make Windows "feel" MDM-managed.
@@ -77,15 +76,15 @@ if /i "%enrollchoice%"=="Y" (
 ) else if /i "%enrollchoice%"=="AE" (
     echo.
     echo Skipping MDM enrollment (already enrolled).
-    goto ENDSTEP1
+    goto :eof
 ) else if /i "%enrollchoice%"=="N" (
     echo.
     echo Skipping MDM enrollment.
-    goto ENDSTEP1
+    goto :eof
 ) else (
     echo.
     echo Invalid choice. Please enter Y, N, or AE.
-    goto MDMSTEP
+    goto STEP1
 )
 
 :ENROLL
@@ -102,11 +101,9 @@ reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-
 echo.
 echo Fake MDM Enrollment complete!
 echo.
-:ENDSTEP1
-exit /b
+goto :eof
 
 :STEP2
-:POLICYSTEP
 echo STEP 2: Apply Microsoft Edge for Business Group Policies
 echo ----------------------------------------------------------
 echo Do you want to proceed and apply the Edge policies?
@@ -119,11 +116,11 @@ if /i "%polchoice%"=="Y" (
 ) else if /i "%polchoice%"=="N" (
     echo.
     echo Skipping Edge policies.
-    exit /b
+    goto :eof
 ) else (
     echo.
     echo Invalid choice. Please enter Y or N.
-    goto POLICYSTEP
+    goto STEP2
 )
 
 :APPLYPOLICIES
@@ -219,7 +216,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v HubsSidebarEnabled /t REG_DWO
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v TabServicesEnabled /t REG_DWORD /d 0 /f
 echo.
 echo Edge policies applied!
-exit /b
+goto :eof
 
 :REVERTALL
 call :REVERTMDM
@@ -232,14 +229,14 @@ echo Reverting Step 1: Removing MDM-FakeEnrollment...
 reg delete "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f >nul 2>&1
 reg delete "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f >nul 2>&1
 echo MDM-FakeEnrollment removed.
-exit /b
+goto :eof
 
 :REVERTPOLICIES
 echo.
 echo Reverting Step 2: Removing Edge policies...
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f >nul 2>&1
 echo Edge policies removed.
-exit /b
+goto :eof
 
 :END
 echo.
@@ -249,4 +246,4 @@ echo   please restart Microsoft Edge for changes to take effect.
 echo ==========================================================
 echo.
 pause
-exit /b
+goto MAINMENU
