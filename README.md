@@ -6,7 +6,7 @@ The default search engine is DuckDuckGo. As of now, you may set your own one by 
 
 ## Step 1: MDM-FakeEnrollment
 
-Some Microsoft Edge policies (such as homepage, new tab, search provider, and others) are only honored on devices that are either domain-joined or enrolled in an MDM (Mobile Device Management) solution. On standalone or non-domain-joined Windows devices, these policies are ignored—even if set in the registry—unless the device appears to be MDM-managed.
+Some Microsoft Edge policies (such as homepage, new tab, search provider, and others) are only honored on devices that are either domain-joined or enrolled in an MDM (Mobile Device Management) solution. On standalone or non-domain-joined Windows devices, these policies are ignored even if set in the registry unless the device appears to be MDM-managed.
 
 **MDM-FakeEnrollment** is a workaround that adds a minimal set of registry keys to make Edge "think" the device is enrolled in MDM, allowing all restricted policies to be applied and enforced.
 
