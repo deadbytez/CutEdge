@@ -61,10 +61,10 @@ set /p mdmchoice=Your choice [Y/N]:
 if /i "%mdmchoice%"=="Y" (
     echo.
     echo Applying fake MDM enrollment...
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentType" /t REG_DWORD /d 6 /f >nul
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentID" /t REG_SZ /d "00000000-0000-0000-0000-000000000000" /f >nul
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "DeviceCertificate" /t REG_BINARY /d 00 /f >nul
-    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "UPN" /t REG_SZ /d "user@domain.com" /f >nul
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentType" /t REG_DWORD /d 6 /f
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "EnrollmentID" /t REG_SZ /d "00000000-0000-0000-0000-000000000000" /f
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "DeviceCertificate" /t REG_BINARY /d 00 /f
+    reg add "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /v "UPN" /t REG_SZ /d "user@domain.com" /f
     echo.
     echo Fake MDM enrollment applied!
     pause
