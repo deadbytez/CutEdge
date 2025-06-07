@@ -232,14 +232,14 @@ echo Reverting Step 1: Removing MDM-FakeEnrollment...
 reg delete "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f >nul 2>&1
 reg delete "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f >nul 2>&1
 echo MDM-FakeEnrollment removed.
-goto END
+exit /b
 
 :REVERTPOLICIES
 echo.
 echo Reverting Step 2: Removing Edge policies...
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f >nul 2>&1
 echo Edge policies removed.
-goto END
+exit /b
 
 :END
 echo.
