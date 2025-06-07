@@ -4,29 +4,42 @@ color 1F
 
 :MAINMENU
 cls
-echo ==========================================================
-echo                   CutEdge v1.0
-echo      Microsoft Edge for Security and Privacy
-echo ==========================================================
+echo / CutEdge v1.0                            \
+echo / Microsoft Edge for Security and Privacy \
+echo.
+echo DESCRIPTION
+echo ----------------------------------------------------------
+echo This script fixes many common annoyances with Microsoft Edge
+echo and makes the browser's user interface less cluttered.
+echo It also applies security and privacy enhancements.
+echo.
+echo NOTE: These policies are up-to-date with Microsoft Edge version 137.
+echo.
+echo IMPORTANT NOTICE
+echo ----------------------------------------------------------
+echo 1. Without MDM FakeEnrollment, most Edge policy changes
+echo    will NOT apply.
+echo 2. As a side effect, Tamper Protection will be forcefully
+echo    turned OFF on this device.
+echo 3. You MUST restart Microsoft Edge after this script
+echo    completes to activate the new policies.
+echo 4. If websites do not work properly, enable third-party cookies
+echo    for the website by clicking the padlock button next to the
+echo    address bar, then go into the cookie files section where you
+echo    can enable third-party cookies for that site.
 echo.
 echo MAIN MENU
 echo ----------------------------------------------------------
 echo [1] Apply all changes (Step 1 and Step 2)
-echo [2] Revert all changes
-echo [3] Revert only Step 1 (MDM-FakeEnrollment)
-echo [4] Revert only Step 2 (Edge policies)
-echo [5] Exit
+echo [2] Exit
 echo.
-set /p mainchoice=Select an option [1-5]: 
+set /p mainchoice=Select an option [1-2]: 
 
 if "%mainchoice%"=="1" goto APPLYALL
-if "%mainchoice%"=="2" goto REVERTALL
-if "%mainchoice%"=="3" goto REVERTMDM
-if "%mainchoice%"=="4" goto REVERTPOLICIES
-if "%mainchoice%"=="5" exit /b
+if "%mainchoice%"=="2" exit /b
 
 echo.
-echo Invalid choice. Please enter 1, 2, 3, 4, or 5.
+echo Invalid choice. Please enter 1 or 2.
 pause
 goto MAINMENU
 
@@ -187,32 +200,5 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v HubsSidebarEnabled /t REG_DWO
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v TabServicesEnabled /t REG_DWORD /d 0 /f
 echo.
 echo Edge policies applied!
-pause
-goto :eof
-
-:REVERTALL
-call :REVERTMDM
-call :REVERTPOLICIES
-goto MAINMENU
-
-:REVERTMDM
-cls
-echo REVERT: Fake MDM Enrollment
-echo ----------------------------------------------------------
-echo This will remove the fake MDM enrollment registry keys.
-echo.
-reg delete "HKLM\SOFTWARE\Microsoft\Enrollments\00000000-0000-0000-0000-000000000000" /f >nul 2>&1
-echo Fake MDM enrollment removed (if it existed).
-pause
-goto :eof
-
-:REVERTPOLICIES
-cls
-echo REVERT: Microsoft Edge Policies
-echo ----------------------------------------------------------
-echo This will remove the Edge group policy registry keys.
-echo.
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f >nul 2>&1
-echo Edge policies removed (if they existed).
 pause
 goto :eof
