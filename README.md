@@ -3,6 +3,11 @@ This script allows you to automatically fix annoyances with Microsoft Edge & mak
 
 The default search engine is DuckDuckGo. As of now, you may set your own one by modifying the script or the registry values found in Step 2.
 
+## Supported Windows editions
+Windows 10 Enterprise or greater
+
+---
+# How does this script work?
 
 ## Step 1: MDM-FakeEnrollment
 
