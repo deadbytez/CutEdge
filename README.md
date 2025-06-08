@@ -1,11 +1,21 @@
 # CutEdge
+<img src="https://github.com/deadbytez/CutEdge/blob/main/preview.png?raw=true" width="85%">
 This script allows you to automatically fix annoyances with Microsoft Edge & make it more private and secure.
 
 The default search engine is DuckDuckGo. As of now, you may set your own one by modifying the script or the registry values found in Step 2.
 
+After applying the script it is recommended to go into Microsoft Edge settings and adjust your settings since not everything is available via a group policy.
+
 ## Supported Windows editions
 Windows 10 Enterprise or greater
 
+Pro or Home editions were not tested by me. Feedback will be apprecieated.
+
+## Important notes
+1. Without MDM FakeEnrollment, most Edge policy changes will NOT apply.
+2. As a side effect, **Tamper Protection will be forcefully turned OFF** on this device.
+3. You MUST restart Microsoft Edge after this script completes to activate the new policies.
+4. If websites do not work properly, **enable third-party cookies for the website** by clicking the padlock button next to the address bar, then go into the cookie files section where you can enable third-party cookies for that site.
 ---
 # How does this script work?
 
@@ -39,14 +49,14 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | DefaultSearchProviderEnabled | 1 | Enables the default search provider in the address bar. |
 | DefaultSearchProviderName | "DuckDuckGo" | Sets the display name of the default search provider. |
 | DefaultSearchProviderSearchURL | "https://duckduckgo.com/?q={searchTerms}" | Sets the search URL template for the default search provider. `{searchTerms}` is replaced by the user's query. |
-| GenAILocalFoundationalModelSettings | 1 | Allows Edge to download and use local GenAI foundational models for AI features. |
+| GenAILocalFoundationalModelSettings | 1 | Disallows Edge to download and use local GenAI foundational models for AI features. |
 | PasswordManagerEnabled | 0 | Disables Edge's built-in password manager and the offer to save passwords. |
 | EfficiencyModeEnabled | 1 | Enables Efficiency Mode to reduce resource usage when the browser is inactive. |
 | PerformanceDetectorEnabled | 0 | Disables the Performance Detector, which suggests actions to improve browsing performance. |
 | StartupBoostEnabled | 0 | Disables Startup Boost, which preloads Edge processes in the background for faster startup. |
 | HomepageIsNewTabPage | 1 | Sets the homepage to the New Tab page. |
-| NewTabPageAppLauncherEnabled | 1 | Shows the app launcher on the New Tab page. |
-| NewTabPageBingChatEnabled | 1 | Enables Bing Chat on the New Tab page. |
+| NewTabPageAppLauncherEnabled | 1 | Hides the app launcher on the New Tab page. |
+| NewTabPageBingChatEnabled | 1 | Disables Bing Chat on the New Tab page. |
 | NewTabPageCompanyLogoEnabled | 1 | Shows the company logo on the New Tab page (for managed devices). |
 | NewTabPageContentEnabled | 0 | Disables content (like news and weather) on the New Tab page. |
 | NewTabPageHideDefaultTopSites | 1 | Hides the default top sites on the New Tab page. |
@@ -70,7 +80,7 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | BrowserSignin | 0 | Disables the ability to sign in to Edge with a Microsoft account. |
 | ConfigureDoNotTrack | 0 | Disables sending "Do Not Track" requests. |
 | ConfigureOnlineTextToSpeech | 0 | Disables online text-to-speech services. |
-| ConfigureShare | 1 | Enables the Share feature in Edge. |
+| ConfigureShare | 1 | Disables the Share feature in Edge. |
 | DefaultBrowserSettingEnabled | 1 | Sets Edge as the default browser. |
 | CopilotPageContext | 0 | Disables Copilot's access to page context for AI features. |
 | DiagnosticData | 0 | Disables sending diagnostic data to Microsoft. |
