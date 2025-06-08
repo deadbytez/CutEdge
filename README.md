@@ -49,6 +49,7 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | DefaultSearchProviderEnabled | 1 | Enables the default search provider in the address bar. |
 | DefaultSearchProviderName | "DuckDuckGo" | Sets the display name of the default search provider. |
 | DefaultSearchProviderSearchURL | "https://duckduckgo.com/?q={searchTerms}" | Sets the search URL template for the default search provider. `{searchTerms}` is replaced by the user's query. |
+| SavingBrowserHistoryDisabled | 1 (disabled) or 0 (enabled) | Disables saving browser history. User's choice. |
 | GenAILocalFoundationalModelSettings | 1 | Disallows Edge to download and use local GenAI foundational models for AI features. |
 | PasswordManagerEnabled | 0 | Disables Edge's built-in password manager and the offer to save passwords. |
 | EfficiencyModeEnabled | 1 | Enables Efficiency Mode to reduce resource usage when the browser is inactive. |
@@ -76,7 +77,7 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | AutofillMembershipsEnabled | 0 | Disables autofill for membership cards and loyalty programs. |
 | BackgroundModeEnabled | 0 | Disables running Edge in the background after closing all windows. |
 | BingAdsSuppression | 1 | Enables Bing Ads suppression. |
-| BlockThirdPartyCookies | 1 | Enables blocking of third-party cookies. |
+| BlockThirdPartyCookies | 1 (enabled) or 0 (disabled) | Enables blocking of third-party cookies. User's choice. |
 | BrowserSignin | 0 | Disables the ability to sign in to Edge with a Microsoft account. |
 | ConfigureDoNotTrack | 0 | Disables sending "Do Not Track" requests. |
 | ConfigureOnlineTextToSpeech | 0 | Disables online text-to-speech services. |
@@ -133,3 +134,15 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | WalletDonationEnabled | 0 | Disables the Edge Wallet donation feature. |
 | HubsSidebarEnabled | 0 | Disables the Hubs Sidebar feature. |
 | TabServicesEnabled | 0 | Disables Tab Services (grouping, sharing, etc). |
+
+## Step 3: Applying a pre-configured Microsoft Edge profile
+This step applies a pre-configured profile available in this repository. Full list of changes:
+- Disabled bookmarks on start tab page;
+- Disabled Copilot 'helper' features;
+- Disabled opening websites in Internet Explorer mode;
+- Disabled page preloading;
+- Disabled saving cookies;
+- Disabled sleeping tabs;
+- Disabled SmartScreen (it sends full URLs to Microsoft);
+- Disabled Typo Protection;
+- English (UK) as preferred language.
