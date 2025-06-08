@@ -1,5 +1,5 @@
 # CutEdge
-<img src="https://github.com/deadbytez/CutEdge/blob/main/preview.png?raw=true" width="85%">
+<img src="https://github.com/azhcat/CutEdge/blob/main/preview.png?raw=true" width="85%">
 This script allows you to automatically fix annoyances with Microsoft Edge & make it more private and secure.
 
 The default search engine is DuckDuckGo. As of now, you may set your own one by modifying the script or the registry values found in Step 2.
@@ -136,7 +136,7 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | TabServicesEnabled | 0 | Disables Tab Services (grouping, sharing, etc). |
 
 ## Step 3: Applying a pre-configured Microsoft Edge profile
-This step applies a pre-configured profile available in this repository. Full list of changes:
+This step applies a [pre-configured profile available in this repository](https://github.com/azhcat/CutEdge/blob/main/edge-profile.zip). Full list of changes:
 - Disabled bookmarks on start tab page;
 - Disabled Copilot 'helper' features;
 - Disabled opening websites in Internet Explorer mode;
