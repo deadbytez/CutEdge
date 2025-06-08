@@ -9,7 +9,7 @@ After applying the script it is recommended to go into Microsoft Edge settings a
 ## Supported Windows editions
 Windows 10 Enterprise or greater
 
-Pro or Home editions were not tested by me. Feedback will be apprecieated.
+Pro or Home editions were not tested by me. Feedback will be appreciated.
 
 ## Important notes
 1. Without MDM FakeEnrollment, most Edge policy changes will NOT apply.
