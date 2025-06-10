@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.11 - Microsoft Edge for Security and Privacy
+title CutEdge v1.12 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.11                           \
+echo / CutEdge v1.12                           \
 echo / Microsoft Edge for Security and Privacy \
 echo / Repo: github.com/azhcat/CutEdge         \
 echo.
@@ -45,8 +45,19 @@ pause
 goto MAINMENU
 
 :APPLYALL
-call :STEP1
+call :STEP0
 goto MAINMENU
+
+:STEP0
+cls
+echo STEP 0: Killing Microsoft Edge processes
+echo The script will kill all Microsoft Edge processes in 5 seconds.
+timeout 5
+taskkill /f /im msedge.exe
+taskkill /f /im MicrosoftEdgeUpdate.exe
+echo Attempted to kill all Microsoft Edge Processes.
+pause
+goto :STEP1
 
 :STEP1
 cls
