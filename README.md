@@ -143,6 +143,5 @@ This step applies a [pre-configured profile available in this repository](https:
 - Disabled page preloading;
 - Disabled saving cookies;
 - Disabled sleeping tabs;
-- Disabled SmartScreen (it sends full URLs to Microsoft);
 - Disabled Typo Protection;
 - English (UK) as preferred language.
