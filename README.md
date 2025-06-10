@@ -7,9 +7,12 @@ The default search engine is DuckDuckGo. As of now, you may set your own one by 
 After applying the script it is recommended to go into Microsoft Edge settings and adjust your settings since not everything is available via a group policy.
 
 ## Supported Windows editions
-Windows 10 Enterprise or greater
+Windows 10 Pro or greater
 
-Pro or Home editions were not tested by me. Feedback will be appreciated.
+The Home edition was not tested by me. Feedback will be appreciated.
+
+## Video preview (YouTube)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6CmJUsoGjGM/0.jpg)](https://www.youtube.com/watch?v=6CmJUsoGjGM)
 
 ## Important notes
 1. Without MDM FakeEnrollment, most Edge policy changes will NOT apply.
@@ -33,7 +36,7 @@ Some Microsoft Edge policies (such as homepage, new tab, search provider, and ot
 
 - Sets a few registry keys under `HKLM\SOFTWARE\Microsoft\Enrollments` and `HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts` to mimic the presence of an MDM provider.
 - Unlocks the ability to apply and enforce all Microsoft Edge policies, even on non-domain-joined devices.
-- **Side effect:** Windows Defender Tamper Protection will be **TURNED OFF**.
+- **Side effect:** Windows Defender Tamper Protection will be **TURNED OFF**. You can use an alternative anti-virus (such as Malwarebytes or Kaspersky) to bypass this issue.
 
 For more details and the original method, see [this blog post](https://hitco.at/blog/apply-edge-policies-for-non-domain-joined-devices/).
 
@@ -143,5 +146,4 @@ This step applies a [pre-configured profile available in this repository](https:
 - Disabled page preloading;
 - Disabled saving cookies;
 - Disabled sleeping tabs;
-- Disabled Typo Protection;
-- English (UK) as preferred language.
+- English as preferred language.
