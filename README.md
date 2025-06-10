@@ -12,7 +12,7 @@ Windows 10 Pro or greater
 The Home edition was not tested by me. Feedback will be appreciated.
 
 ## Video preview (YouTube)
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6CmJUsoGjGM/0.jpg)](https://www.youtube.com/watch?v=6CmJUsoGjGM)
+[![CutEdge Preview on YouTube](https://img.youtube.com/vi/6CmJUsoGjGM/0.jpg)](https://www.youtube.com/watch?v=6CmJUsoGjGM)
 
 ## Important notes
 1. Without MDM FakeEnrollment, most Edge policy changes will NOT apply.
