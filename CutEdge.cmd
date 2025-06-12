@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.12 - Microsoft Edge for Security and Privacy
+title CutEdge v1.2 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.12                           \
+echo / CutEdge v1.2                           \
 echo / Microsoft Edge for Security and Privacy \
 echo / Repo: github.com/azhcat/CutEdge         \
 echo.
