@@ -40,6 +40,10 @@ Some Microsoft Edge policies (such as homepage, new tab, search provider, and ot
 
 For more details and the original method, see [this blog post](https://hitco.at/blog/apply-edge-policies-for-non-domain-joined-devices/).
 
+---
+
+### Alternative for MDM-FakeEnrollment
+You can attempt to join an Active Directory domain - Microsoft Edge should accept policies when your computer is in such a domain.
 
 ## Step 2: Microsoft Edge Policy Registry Settings
 
@@ -137,6 +141,55 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | WalletDonationEnabled | 0 | Disables the Edge Wallet donation feature. |
 | HubsSidebarEnabled | 0 | Disables the Hubs Sidebar feature. |
 | TabServicesEnabled | 0 | Disables Tab Services (grouping, sharing, etc). |
+| EnableMediaRouter | 0 | Disables the Media Router (casting) feature in Edge, preventing users from streaming content to other devices. |
+| CACertificateManagementAllowed | 2 | Disallows users from managing CA certificates in Edge; users can only view certificates, not manage them. |
+| CAPlatformIntegrationEnabled | 0 | Disables use of user-added TLS certificates from platform trust stores for server authentication in Edge. |
+| AutomaticFullscreenBlockedForUrls | * | Blocks all sites from entering fullscreen automatically without user gesture, enhancing security against unwanted fullscreen requests. |
+| CookiesBlockedForUrls | ntp.msn.com | Blocks cookies from being set or read by ntp.msn.com (I believe Microsoft Edge keeps contacting this domain). |
+| DefaultGeolocationSetting | 2 | Disables location access for all sites by default, preventing websites from accessing geolocation data. |
+| DefaultInsecureContentSetting | 2 | Blocks insecure content (HTTP) from loading on HTTPS pages by default, improving security. |
+| DefaultCookiesSetting | 4 | Blocks all third-party cookies by default, maximizing privacy. |
+| DefaultThirdPartyStoragePartitioningSetting | 1 | Enables third-party storage partitioning by default, isolating third-party storage for privacy. |
+| DefaultFileSystemReadGuardSetting | 2 | Blocks sites from reading files via the File System API by default, increasing data security. |
+| DefaultFileSystemWriteGuardSetting | 2 | Blocks sites from writing files via the File System API by default, increasing data security. |
+| DefaultWebBluetoothGuardSetting | 2 | Blocks sites from accessing Bluetooth devices by default, enhancing device security. |
+| DefaultWebHidGuardSetting | 2 | Blocks sites from accessing Human Interface Devices (HID) by default, improving security. |
+| DefaultWindowManagementSetting | 2 | Blocks sites from managing windows (e.g., opening/closing) by default, reducing risk of abuse. |
+| ShowPDFDefaultRecommendationsEnabled | 0 | Disables prompts to set Edge as the default PDF reader, reducing user interruptions. |
+| SpotlightExperiencesAndRecommendationsEnabled | 0 | Disables personalized recommendations, tips, and notifications for Microsoft services in Edge. |
+| FeatureFlagOverridesControl | 1 | Allows users to override feature flags in Edge, enabling advanced customization. |
+| ExtensionInstallBlocklist | * | Blocks installation of all extensions in Edge, maximizing control and security. |
+| ProactiveAuthWorkflowEnabled | 0 | Disables proactive authentication workflows in Edge, restricting automatic sign-in scenarios. |
+| SeamlessWebToBrowserSignInEnabled | 0 | Disables seamless web-to-browser sign-in, requiring explicit user authentication. |
+| WebToBrowserSignInEnabled | 0 | Disables web-to-browser sign-in, preventing automatic sign-in flows. |
+| EdgeManagementEnabled | 0 | Disables Edge management features, restricting centralized browser management. |
+| MAMEnabled | 0 | Disables Mobile Application Management (MAM) support in Edge. |
+| NativeMessagingBlocklist | * | Blocks all native messaging hosts, preventing extensions from communicating with native applications. |
+| PinBrowserEssentialsToolbarButton | 0 | Hides the Browser Essentials toolbar button in Edge. |
+| InsecurePrivateNetworkRequestsAllowed | 0 | Disallows insecure private network requests, enhancing network security. |
+| PrivateNetworkAccessRestrictionsEnabled | 0 | Disables private network access restrictions. |
+| RelatedWebsiteSetsEnabled | 0 | Disables Related Website Sets, preventing Edge from grouping related sites for features like cookies and storage. |
+| NewTabPageAllowedBackgroundTypes | 3 | Restricts the types of backgrounds allowed on the new tab page to those specified by value 3. |
+| NewTabPageSearchBox | redirect | Configures the new tab page search box to redirect searches to the default search provider. |
+| EdgeWorkspacesEnabled | 0 | Disables Edge Workspaces, preventing collaborative browsing sessions. |
+| AdditionalSearchBoxEnabled | 0 | Disables the additional search box on the new tab page. |
+| EditFavoritesEnabled | 0 | Disables the ability to edit favorites in Edge. |
+| PaymentMethodQueryEnabled | 0 | Disables querying for payment methods, increasing privacy. |
+| QuickSearchShowMiniMenu | 0 | Disables the mini menu for quick search, reducing distractions. |
+| QuickViewOfficeFilesEnabled | 0 | Disables quick view for Office files in Edge. |
+| RemoteDebuggingAllowed | 0 | Disables remote debugging, improving security. |
+| RelatedMatchesCloudServiceEnabled | 0 | Disables the related matches cloud service, reducing data sent to Microsoft. |
+| ResolveNavigationErrorsUseWebService | 0 | Disables use of web service to resolve navigation errors, reducing external data requests. |
+| ShowAcrobatSubscriptionButton | 0 | Hides the Acrobat subscription button in Edge's PDF viewer. |
+| SitePerProcess | 1 | Enables site isolation, running each site in its own process for security. |
+| SuperDragDropEnabled | 0 | Disables Super Drag and Drop, preventing advanced drag-and-drop features. |
+| TextPredictionEnabled | 0 | Disables text prediction, enhancing privacy. |
+| UploadFromPhoneEnabled | 0 | Disables uploading from phone, restricting cross-device features. |
+| VisualSearchEnabled | 0 | Disables Visual Search, preventing image-based search features. |
+| WebRtcLocalhostIpHandling | DisableNonProxiedUdp | Prevents WebRTC from exposing local IP addresses unless proxied, enhancing privacy. |
+| SmartScreenEnabled | 0 (Recommended) | Disables Microsoft Defender SmartScreen, which protects against malicious sites and downloads (user can override). |
+| TyposquattingCheckerEnabled | 0 (Recommended) | Disables the Typosquatting Checker, which warns about potential typo-based phishing domains (user can override). |
+| ScarewareBlockerProtectionEnabled | 0 (Recommended) | Disables Scareware Blocker Protection, which blocks scareware and misleading content (user can override). |
 
 ## Step 3: Applying a pre-configured Microsoft Edge profile
 This step applies a [pre-configured profile available in this repository](https://github.com/azhcat/CutEdge/blob/main/edge-profile.zip). Full list of changes:
