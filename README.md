@@ -6,6 +6,10 @@ The default search engine is DuckDuckGo. As of now, you may set your own one by 
 
 After applying the script it is recommended to go into Microsoft Edge settings and adjust your settings since not everything is available via a group policy.
 
+---
+
+**Windows Defender may pick up this script as Wacatac.B!ml** - temporarily turn off Defender if it does so.
+
 ## Supported Windows editions
 Windows 10 Pro or greater
 
