@@ -23,7 +23,18 @@ The Home edition was not tested by me. Feedback will be appreciated.
 2. As a side effect, **Tamper Protection will be forcefully turned OFF** on this device.
 3. You MUST restart Microsoft Edge after this script completes to activate the new policies.
 4. If websites do not work properly, **enable third-party cookies for the website** by clicking the padlock button next to the address bar, then go into the cookie files section where you can enable third-party cookies for that site.
+
 ---
+
+## Removing changes made by the script
+1. Remove the ```HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF``` key.
+2. Remove the ```HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF``` key.
+3. Remove all registry entries in ```HKLM\SOFTWARE\Policies\Microsoft\Edge```
+4. Remove all registry entries in ```HKLM\SOFTWARE\Policies\Microsoft\Edge\Recommended```
+5. Optionally remove the Microsoft Edge profile by removing the ```Edge``` folder in ```%LocalAppData%\Microsoft```
+
+---
+
 # How does this script work?
 
 ## Step 1: MDM-FakeEnrollment
