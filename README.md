@@ -163,8 +163,6 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | CookiesBlockedForUrls | ntp.msn.com | Blocks cookies from being set or read by ntp.msn.com (I believe Microsoft Edge keeps contacting this domain). |
 | DefaultGeolocationSetting | 2 | Disables location access for all sites by default, preventing websites from accessing geolocation data. |
 | DefaultInsecureContentSetting | 2 | Blocks insecure content (HTTP) from loading on HTTPS pages by default, improving security. |
-| DefaultCookiesSetting | 4 | Blocks all third-party cookies by default, maximizing privacy. |
-| DefaultThirdPartyStoragePartitioningSetting | 1 | Enables third-party storage partitioning by default, isolating third-party storage for privacy. |
 | DefaultFileSystemReadGuardSetting | 2 | Blocks sites from reading files via the File System API by default, increasing data security. |
 | DefaultFileSystemWriteGuardSetting | 2 | Blocks sites from writing files via the File System API by default, increasing data security. |
 | DefaultWebBluetoothGuardSetting | 2 | Blocks sites from accessing Bluetooth devices by default, enhancing device security. |
