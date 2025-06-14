@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.2 - Microsoft Edge for Security and Privacy
+title CutEdge v1.21 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.2                           \
+echo / CutEdge v1.21                           \
 echo / Microsoft Edge for Security and Privacy \
 echo / Repo: github.com/azhcat/CutEdge         \
 echo.
@@ -221,9 +221,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v CAPlatformIntegrationEnabled 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v AutomaticFullscreenBlockedForUrls /t REG_MULTI_SZ /d "*" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v CookiesBlockedForUrls /t REG_MULTI_SZ /d "ntp.msn.com" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultGeolocationSetting /t REG_DWORD /d 2 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultInsecureContentSetting /t REG_DWORD /d 2 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultCookiesSetting /t REG_DWORD /d 4 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultThirdPartyStoragePartitioningSetting /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultFileSystemReadGuardSetting /t REG_DWORD /d 2 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultFileSystemWriteGuardSetting /t REG_DWORD /d 2 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultWebBluetoothGuardSetting /t REG_DWORD /d 2 /f
@@ -260,6 +257,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SuperDragDropEnabled /t REG_D
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v TextPredictionEnabled /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v UploadFromPhoneEnabled /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v VisualSearchEnabled /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultInsecureContentSetting /t REG_DWORD /d 2 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v WebRtcLocalhostIpHandling /t REG_SZ /d "DisableNonProxiedUdp" /f
 echo.
 echo Applying recommended Microsoft Edge policies...
