@@ -71,7 +71,9 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | DefaultSearchProviderEnabled | 1 | Enables the default search provider in the address bar. |
 | DefaultSearchProviderName | "DuckDuckGo" | Sets the display name of the default search provider. |
 | DefaultSearchProviderSearchURL | "https://duckduckgo.com/?q={searchTerms}" | Sets the search URL template for the default search provider. `{searchTerms}` is replaced by the user's query. |
-| SavingBrowserHistoryDisabled | 1 (disabled) or 0 (enabled) | Disables saving browser history. User's choice. |
+| SavingBrowserHistoryDisabled | 1 (disabled) or 0 (enabled) | Disables saving browser history. User choice. |
+| Disable3DAPIs | 1 | Disables 3D graphics APIs in Edge, preventing websites from accessing WebGL and Pepper 3D APIs. This blocks web-based 3D graphics and games, improving privacy but may break some sites. User choice. |
+| DefaultThirdPartyStoragePartitioningSetting | 1 | Allows third-party storage partitioning by default, enabling third-party sites to store data in a partitioned way for privacy and compatibility. User choice. |
 | GenAILocalFoundationalModelSettings | 1 | Disallows Edge to download and use local GenAI foundational models for AI features. |
 | PasswordManagerEnabled | 0 | Disables Edge's built-in password manager and the offer to save passwords. |
 | EfficiencyModeEnabled | 1 | Enables Efficiency Mode to reduce resource usage when the browser is inactive. |
@@ -99,7 +101,7 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | AutofillMembershipsEnabled | 0 | Disables autofill for membership cards and loyalty programs. |
 | BackgroundModeEnabled | 0 | Disables running Edge in the background after closing all windows. |
 | BingAdsSuppression | 1 | Enables Bing Ads suppression. |
-| BlockThirdPartyCookies | 1 (enabled) or 0 (disabled) | Enables blocking of third-party cookies. User's choice. |
+| BlockThirdPartyCookies | 1 (enabled) or 0 (disabled) | Enables blocking of third-party cookies. User choice. |
 | BrowserSignin | 0 | Disables the ability to sign in to Edge with a Microsoft account. |
 | ConfigureDoNotTrack | 0 | Disables sending "Do Not Track" requests. |
 | ConfigureOnlineTextToSpeech | 0 | Disables online text-to-speech services. |
