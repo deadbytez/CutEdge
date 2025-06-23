@@ -310,6 +310,7 @@ goto :BROWSERHISTORY
 
 :STORAGEPARTITIONING
 echo Do you want to allow third-party storage partitioning?
+echo (this may cause cookies not to save for some reason)
 echo   [Y]es - Allow third-party storage partitioning
 echo   [N]o  - Skip
 set /p storageparchoice=Your choice [Y/N]: 
