@@ -1,6 +1,6 @@
 # CutEdge
 <img src="https://github.com/azhcat/CutEdge/blob/main/preview.png?raw=true" width="85%">
-This script allows you to automatically fix annoyances with Microsoft Edge & make it more private and secure.
+This script applies my collection of policies that fix annoyances with Microsoft Edge & make it more private and secure.
 
 The default search engine is DuckDuckGo. As of now, you may set your own one by modifying the script or the registry values found in Step 2.
 
