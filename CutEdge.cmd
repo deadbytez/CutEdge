@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.21 - Microsoft Edge for Security and Privacy
+title CutEdge v1.22 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.21                           \
+echo / CutEdge v1.22                           \
 echo / Microsoft Edge for Security and Privacy \
 echo / Repo: github.com/azhcat/CutEdge         \
 echo.
@@ -271,7 +271,7 @@ echo Do you want to block third-party cookies?
 echo This may cause issues with most websites but
 echo greatly improves privacy.
 echo   [Y]es - Block third-party cookies
-echo   [N]o  - Skip
+echo   [N]o  - Don't block third-party cookies
 
 :THIRDPARTY
 set /p thirdpartychoice=Your choice [Y/N]: 
@@ -297,16 +297,55 @@ set /p historychoice=Your choice [Y/N]:
 if /i "%historychoice%"=="Y" (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SavingBrowserHistoryDisabled /t REG_DWORD /d 1 /f
     echo.
-    goto :POLICIESDONE
+    goto :STORAGEPARTITIONING
 )
 if /i "%historychoice%"=="N" (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SavingBrowserHistoryDisabled /t REG_DWORD /d 0 /f
+    echo.
+    goto :STORAGEPARTITIONING
+)
+echo Invalid choice.
+pause
+goto :BROWSERHISTORY
+
+:STORAGEPARTITIONING
+echo Do you want to allow third-party storage partitioning?
+echo   [Y]es - Allow third-party storage partitioning
+echo   [N]o  - Skip
+set /p storageparchoice=Your choice [Y/N]: 
+if /i "%storageparchoice%"=="Y" (
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultThirdPartyStoragePartitioningSetting /t REG_DWORD /d 1 /f
+    echo.
+    goto :WEBGL
+)
+if /i "%storageparchoice%"=="N" (
+    echo.
+    goto :WEBGL
+)
+echo Invalid choice.
+pause
+goto :STORAGEPARTITIONING
+
+:WEBGL
+echo Do you want to disable 3D APIs (WebGL and Pepper 3D) in Edge?
+echo Disabling 3D APIs will prevent websites from accessing your graphics card for 3D graphics.
+echo This may cause issues mostly with website games or interactive 3D content.
+echo   [Y]es - Disable 3D APIs (improves privacy, but some sites may not work properly)
+echo   [N]o  - Keep 3D APIs enabled (better compatibility)
+set /p webglchoice=Your choice [Y/N]: 
+if /i "%webglchoice%"=="Y" (
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v Disable3DAPIs /t REG_DWORD /d 1 /f
+    echo.
+    goto :POLICIESDONE
+)
+if /i "%webglchoice%"=="N" (
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v Disable3DAPIs /t REG_DWORD /d 0 /f
     echo.
     goto :POLICIESDONE
 )
 echo Invalid choice.
 pause
-goto :BROWSERHISTORY
+goto :WEBGL
 
 :POLICIESDONE
 echo Edge policies applied!
