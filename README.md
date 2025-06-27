@@ -62,7 +62,7 @@ You can attempt to join an Active Directory domain - Microsoft Edge should accep
 
 ## Step 2: Microsoft Edge Policy Registry Settings
 
-These policies are up-to-date with Microsoft Edge version 137.
+These policies are up-to-date with Microsoft Edge version 138.
 
 Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | Registry Value | Value Set | Description |
