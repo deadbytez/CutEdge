@@ -406,7 +406,6 @@ goto MAINMENU
 cls
 echo Removing all Microsoft Edge policies...
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge\Recommended" /f
 echo.
 echo All Edge policies removed!
 pause
