@@ -260,6 +260,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v UploadFromPhoneEnabled /t REG
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v VisualSearchEnabled /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultInsecureContentSetting /t REG_DWORD /d 2 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v WebRtcLocalhostIpHandling /t REG_SZ /d "DisableNonProxiedUdp" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v LocalNetworkAccessRestrictionsEnabled /t REG_DWORD /d 1 /f
 echo.
 echo Applying recommended Microsoft Edge policies...
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge\Recommended" /v SmartScreenEnabled /t REG_DWORD /d 0 /f
