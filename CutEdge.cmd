@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.23 - Microsoft Edge for Security and Privacy
+title CutEdge v1.3 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.23                                 \
+echo / CutEdge v1.3                                  \
 echo / Microsoft Edge for Security and Privacy       \
 echo / Repo: github.com/aNamelessFox/CutEdge         \
 echo.
@@ -33,14 +33,18 @@ echo MAIN MENU
 echo ----------------------------------------------------------
 echo [1] Run the script
 echo [2] Exit
+echo [3] Remove MDM-FakeEnrollment
+echo [4] Remove all Edge policies
 echo.
-set /p mainchoice=Select an option [1-2]: 
+set /p mainchoice=Select an option [1-4]: 
 
 if "%mainchoice%"=="1" goto APPLYALL
 if "%mainchoice%"=="2" exit /b
+if "%mainchoice%"=="3" goto REMOVEMDM
+if "%mainchoice%"=="4" goto REMOVEEDGEPOLICIES
 
 echo.
-echo Invalid choice. Please enter 1 or 2.
+echo Invalid choice. Please enter 1, 2, 3, or 4.
 pause
 goto MAINMENU
 
@@ -385,4 +389,24 @@ if /i "%profilechoice%"=="Y" (
     echo Skipping Edge profile step.
     pause
 )
+goto MAINMENU
+
+:REMOVEMDM
+cls
+echo Removing MDM-FakeEnrollment registry keys...
+reg delete "HKLM\SOFTWARE\Microsoft\Enrollments\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF" /f
+echo.
+echo MDM-FakeEnrollment removed!
+pause
+goto MAINMENU
+
+:REMOVEEDGEPOLICIES
+cls
+echo Removing all Microsoft Edge policies...
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Edge\Recommended" /f
+echo.
+echo All Edge policies removed!
+pause
 goto MAINMENU
