@@ -6,7 +6,7 @@ color 1F
 cls
 echo / CutEdge v1.3                                  \
 echo / Microsoft Edge for Security and Privacy       \
-echo / Repo: github.com/aNamelessFox/CutEdge         \
+echo / Repo: github.com/deadbytez/CutEdge            \
 echo.
 echo DESCRIPTION
 echo ----------------------------------------------------------
@@ -410,3 +410,4 @@ echo.
 echo All Edge policies removed!
 pause
 goto MAINMENU
+
