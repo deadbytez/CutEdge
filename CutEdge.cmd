@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.3 - Microsoft Edge for Security and Privacy
+title CutEdge v1.31 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.3                                  \
+echo / CutEdge v1.31                                 \
 echo / Microsoft Edge for Security and Privacy       \
 echo / Repo: github.com/deadbytez/CutEdge            \
 echo.
@@ -299,35 +299,54 @@ set /p historychoice=Your choice [Y/N]:
 if /i "%historychoice%"=="Y" (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SavingBrowserHistoryDisabled /t REG_DWORD /d 1 /f
     echo.
-    goto :STORAGEPARTITIONING
+    goto :HTTPSONLYMODE
 )
 if /i "%historychoice%"=="N" (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SavingBrowserHistoryDisabled /t REG_DWORD /d 0 /f
     echo.
-    goto :STORAGEPARTITIONING
+    goto :HTTPSONLYMODE
 )
 echo Invalid choice.
 pause
 goto :BROWSERHISTORY
 
-:STORAGEPARTITIONING
-echo Do you want to allow third-party storage partitioning?
-echo (this may cause cookies not to save for some reason)
-echo   [Y]es - Allow third-party storage partitioning
-echo   [N]o  - Skip
-set /p storageparchoice=Your choice [Y/N]: 
-if /i "%storageparchoice%"=="Y" (
-    reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultThirdPartyStoragePartitioningSetting /t REG_DWORD /d 1 /f
+rem Deprecated in Edge 140
+rem :STORAGEPARTITIONING
+rem echo Do you want to allow third-party storage partitioning?
+rem echo (this may cause cookies not to save for some reason)
+rem echo   [Y]es - Allow third-party storage partitioning
+rem echo   [N]o  - Skip
+rem set /p storageparchoice=Your choice [Y/N]: 
+rem if /i "%storageparchoice%"=="Y" (
+rem    reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultThirdPartyStoragePartitioningSetting /t REG_DWORD /d 1 /f
+rem    echo.
+rem    goto :WEBGL
+rem )
+rem if /i "%storageparchoice%"=="N" (
+rem    echo.
+rem    goto :WEBGL
+rem )
+rem echo Invalid choice.
+rem pause
+rem goto :STORAGEPARTITIONING
+
+:HTTPSONLYMODE
+echo Do you want to set HttpsOnlyMode to strict?
+echo   [Y]es - Set HttpsOnlyMode to strict
+echo   [N]o - Skip
+set /p httpschoice=Your choice [Y/N]: 
+if /i "%httpschoice%"=="Y" (
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "HttpsOnlyMode" /t REG_SZ /d "force_enabled" /f
     echo.
     goto :WEBGL
 )
-if /i "%storageparchoice%"=="N" (
+if /i "%httpschoice%"=="N" (
     echo.
     goto :WEBGL
 )
 echo Invalid choice.
 pause
-goto :STORAGEPARTITIONING
+goto :HTTPSONLYMODE
 
 :WEBGL
 echo Do you want to disable 3D APIs (WebGL and Pepper 3D) in Edge?
