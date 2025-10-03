@@ -1,10 +1,10 @@
 @echo off
-title CutEdge v1.31 - Microsoft Edge for Security and Privacy
+title CutEdge v1.32 - Microsoft Edge for Security and Privacy
 color 1F
 
 :MAINMENU
 cls
-echo / CutEdge v1.31                                 \
+echo / CutEdge v1.32                                 \
 echo / Microsoft Edge for Security and Privacy       \
 echo / Repo: github.com/deadbytez/CutEdge            \
 echo.
@@ -261,6 +261,10 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v VisualSearchEnabled /t REG_DW
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DefaultInsecureContentSetting /t REG_DWORD /d 2 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v WebRtcLocalhostIpHandling /t REG_SZ /d "DisableNonProxiedUdp" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v LocalNetworkAccessRestrictionsEnabled /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v Microsoft365CopilotChatIconEnabled /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v WebRtcPostQuantumKeyAgreement /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v OriginKeyedProcessesEnabled /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v RelaunchFastIfOutdated /t REG_DWORD /d 1 /f
 echo.
 echo Applying recommended Microsoft Edge policies...
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge\Recommended" /v SmartScreenEnabled /t REG_DWORD /d 0 /f
