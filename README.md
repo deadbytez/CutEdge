@@ -200,6 +200,10 @@ Location: **HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge**
 | VisualSearchEnabled | 0 | Disables Visual Search, preventing image-based search features. |
 | WebRtcLocalhostIpHandling | DisableNonProxiedUdp | Prevents WebRTC from exposing local IP addresses unless proxied, enhancing privacy. |
 | LocalNetworkAccessRestrictionsEnabled | 1 | Blocks requests from public websites to devices on a user's local network without explicit user permission. |
+| Microsoft365CopilotChatIconEnabled | 0 | Hides the Copilot icon in the toolbar and PDF viewer. |
+| WebRtcPostQuantumKeyAgreement               | 1     | Enables post-quantum key agreement for WebRTC to strengthen secure real-time communications.                                  |
+| OriginKeyedProcessesEnabled                 | 1     | Enables origin-keyed process isolation, improving security by separating site processes per origin.                          |
+| RelaunchFastIfOutdated                      | 1     | Ensures fast browser relaunch when the current version is outdated, reducing exposure to vulnerabilities.                     |
 | SmartScreenEnabled | 0 (Recommended) | Disables Microsoft Defender SmartScreen, which protects against malicious sites and downloads (user can override). |
 | TyposquattingCheckerEnabled | 0 (Recommended) | Disables the Typosquatting Checker, which warns about potential typo-based phishing domains (user can override). |
 | ScarewareBlockerProtectionEnabled | 0 (Recommended) | Disables Scareware Blocker Protection, which blocks scareware and misleading content (user can override). |
